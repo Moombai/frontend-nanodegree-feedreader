@@ -35,7 +35,7 @@ $(function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
                 expect(feed.url.length).not.toBe(0);
-            })
+            });
         });
 
 
@@ -53,7 +53,7 @@ $(function() {
 
 
     /* TODO: Write a new test suite named "The menu" */
-    describe('The menu', function() {    
+    describe('The menu', function() {
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
@@ -84,18 +84,50 @@ $(function() {
           });
     });
     /* TODO: Write a new test suite named "Initial Entries" */
-
+    describe('Initial Entries', function() {
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-
+        beforeEach(function(done) {
+            loadFeed(0, function(){
+                done();
+            });
+        });
+        it('should display after the load feed function is executed', function(){
+            expect($('.feed').children.length).not.toBe(0);
+        });
+    });
     /* TODO: Write a new test suite named "New Feed Selection" */
-
+    describe('New Feed Selection', function() {
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        let headerTitle,
+            headerTitle2;
+
+        beforeEach(function(done) {
+            loadFeed(3, function() {
+                done();
+            });
+            headerTitle = $('.header-title').text();
+            console.log("title1", headerTitle);
+        });
+
+        beforeEach(function (done) {
+            loadFeed(2, function () {
+                done();
+            });
+            headerTitle2 = $('.header-title').text();
+            console.log("title2", headerTitle2);
+        });
+
+        it('should update when new content is loaded', function(done) {
+            expect(headerTitle).not.toBe(headerTitle2);
+            done();
+        });
+    });
 }());
