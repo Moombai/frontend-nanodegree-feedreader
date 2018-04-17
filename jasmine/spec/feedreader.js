@@ -106,27 +106,21 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        let headerTitle,
-            headerTitle2;
+        let firstFeedText,
+            secondFeedText;
 
         beforeEach(function(done) {
-            loadFeed(3, function() {
-                done();
+            loadFeed(1, function() {
+                firstFeedText = $('.feed h2').text();
+                loadFeed(2, function() {
+                    secondFeedText = $('.feed h2').text();
+                    done();
+                });
             });
-            headerTitle = $('.header-title').text();
-            console.log("title1", headerTitle);
-        });
-
-        beforeEach(function (done) {
-            loadFeed(2, function () {
-                done();
-            });
-            headerTitle2 = $('.header-title').text();
-            console.log("title2", headerTitle2);
         });
 
         it('should update when new content is loaded', function(done) {
-            expect(headerTitle).not.toBe(headerTitle2);
+            expect(firstFeedText).not.toBe(secondFeedText);
             done();
         });
     });
