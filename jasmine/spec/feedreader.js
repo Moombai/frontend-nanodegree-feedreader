@@ -92,12 +92,12 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         beforeEach(function(done) {
-            loadFeed(0, function(){
+            loadFeed(3, function(){
                 done();
             });
         });
         it('should display after the load feed function is executed', function(){
-            expect($('.feed').children.length).not.toBe(0);
+            expect($('.entry').children.length).not.toBe(0);
         });
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
