@@ -1,17 +1,23 @@
 $(function() {
     // This section, tests allFeeds. allFeeds is an array that contains a list of numbers
     describe('RSS Feeds', function() {
+        let allFeedsCopy;
+
+        // Create a copy of all feeds for testing purposes
+        beforeEach(function() {
+            allFeedsCopy = [...allFeeds];
+        });
         // Test that the allFeeds array exists and that it is not empty
         it('are defined', function() {
-            expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
+            expect(allFeedsCopy).toBeDefined();
+            expect(allFeedsCopy.length).not.toBe(0);
         });
 
 
         // Checks each feed has a property
         // called url and that it is not empty
         it('each have URL that is not empty', function() {
-            allFeeds.forEach(function(feed) {
+            allFeedsCopy.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
                 expect(feed.url.length).not.toBe(0);
             });
@@ -21,7 +27,7 @@ $(function() {
         // Checks each feed has a property
         // called name and that it is not empty
         it('each have a name that is not empty', function() {
-            allFeeds.forEach(function(feed) {
+            allFeedsCopy.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
                 expect(feed.name.length).not.toBe(0);
             });
@@ -30,19 +36,23 @@ $(function() {
 
 
     describe('The menu', function() {
+        let myBody,
+            myMenuIcon;
+
+        beforeEach(function () {
+            myBody = $("body");
+        });
         // Tests that the menu is hidden by checking for the presence
         // of menu-hidden on the body class
         it('should be hidden by default', function() {
-            let myBody = $("body").hasClass("menu-hidden");
-            expect(myBody).toBe(true);
+            expect(myBody.hasClass("menu-hidden")).toBe(true);
         });
 
           // In this section we imitate user behaviour by clicking the menu icon
           // The menu is hidden by default so on first click we expect the menu-hidden
           // class to be removed. On second click it should be added to the body again
           it('can be displayed and hidden on click', function() {
-              let myBody = $("body");
-              let myMenuIcon = $('.menu-icon-link');
+              myMenuIcon = $('.menu-icon-link');
 
               // Test .menu-hidden has been removed
               myMenuIcon.trigger("click");
