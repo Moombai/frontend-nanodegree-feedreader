@@ -1,23 +1,17 @@
 $(function() {
     // This section, tests allFeeds. allFeeds is an array that contains a list of numbers
     describe('RSS Feeds', function() {
-        let allFeedsCopy;
-
-        // Create a copy of all feeds for testing purposes
-        beforeEach(function() {
-            allFeedsCopy = [...allFeeds];
-        });
         // Test that the allFeeds array exists and that it is not empty
         it('are defined', function() {
-            expect(allFeedsCopy).toBeDefined();
-            expect(allFeedsCopy.length).not.toBe(0);
+            expect(allFeeds).toBeDefined();
+            expect(allFeeds.length).not.toBe(0);
         });
 
 
         // Checks each feed has a property
         // called url and that it is not empty
         it('each have URL that is not empty', function() {
-            allFeedsCopy.forEach(function(feed) {
+            allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
                 expect(feed.url.length).not.toBe(0);
             });
@@ -27,7 +21,7 @@ $(function() {
         // Checks each feed has a property
         // called name and that it is not empty
         it('each have a name that is not empty', function() {
-            allFeedsCopy.forEach(function(feed) {
+            allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
                 expect(feed.name.length).not.toBe(0);
             });
