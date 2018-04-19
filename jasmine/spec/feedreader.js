@@ -66,7 +66,7 @@ $(function() {
             });
         });
         it('should display after the load feed function is executed', function(){
-            expect($('.entry').children.length).not.toBe(0);
+            expect($('.feed .entry').length).not.toBe(0);
         });
     });
 
